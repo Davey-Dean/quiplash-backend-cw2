@@ -1,0 +1,24 @@
+<form v-if="me.state == 0" @submit.prevent="login">  
+
+    <button type="submit">Login</button>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter Username" v-model="username">
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Enter Password" v-model="password">
+
+</form>
+
+<div v-else>
+    <p>Waiting for other players...</p>
+
+    <div class="row">
+            <div v-for="player of players" class="col-sm-2 text-center">
+                <div class="player">
+                    <strong> Player {{player.name}}</strong>
+                </div>
+            </div>
+
+    <div v-if="me.name == 1">
+        <button class="btn btn-lg btn-success" @click="admin('start')">Start Game</button>
+    </div>
+</div>
