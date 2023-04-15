@@ -8,9 +8,15 @@ var app = new Vue({
         chatmessage: '',
         username: '',
         password: '',
-        me: { name: '', state: 0, score: 0 },
-        state: { state: false },
+        me: { name: '', state: false, roundScore: 0, totalScore: 0, prompts: [] },
+        state: { state: false, round: 0 },
         players: {},
+        audience: {},
+        prompt: '',
+        answer: '',
+        votingPrompts: [],
+        voteGroupUno: [],
+        voteGroupDos: []
     },
     mounted: function() {
         connect(); 
@@ -26,16 +32,57 @@ var app = new Vue({
             socket.emit('chat',this.chatmessage);
             this.chatmessage = '';
         },
+        announce(message) {
+            const messages = document.getElementById('messages');
+            var item = document.createElement('li');
+            item.textContent = message;
+            messages.prepend(item);
+        },
+        admin(command) {
+            socket.emit('admin', command);
+        },
         login() {
             socket.emit('login', this.username, this.password);
+        },
+        register() {
+            socket.emit('register', this.username, this.password);
+        },
+        submitPrompt(prompt) {
+            socket.emit('submitPrompt', this.username, this.password, prompt);
+            clearPrompt(prompt);
+        },
+        submitAnswer(answer) {
+            socket.emit('submitAnswer', this.username, answer, this.me.prompts[0]);
+            app.answer = '';
+        },
+        submitVote(vote) {
+            socket.emit('submitVote', this.votingPrompts[0], vote, this.username);
         },
         update(data) {
             this.me = data.me;
             this.state = data.state;
             this.players = data.players;
+            this.audience = data.audience;
+            this.votingPrompts = data.votingPrompts;
+            this.voteGroupUno = data.voteGroupUno;
+            this.voteGroupDos = data.voteGroupDos;
         },
+        fail(message) {
+            this.error = message;
+            setTimeout(clearError, 3000);
+        }
     }
 });
+
+function clearError() {
+    app.error = null;
+}
+
+function clearPrompt(input) {
+    if (19 < input.length && input.length < 101) {
+        app.prompt = '';
+    }
+}
 
 function connect() {
     //Prepare web socket
@@ -51,6 +98,10 @@ function connect() {
     socket.on('state', function(data) {
         app.update(data);
     });
+
+    socket.on('fail', function(message) {
+        app.fail(message);
+    })
 
     //Handle connection error
     socket.on('connect_error', function(message) {

@@ -1,0 +1,13 @@
+<div>
+    <p>Results being shown on Main Display...</p>
+    <p>Waiting for host to continue...</p>
+   
+    <div v-if="me.number == 1" class="d-md-flex justify-content-md-center">
+        <div v-if="votingPrompts.length > 1">
+            <button class="btn btn-lg btn-success mb-1" @click="admin('next')">Next Prompt</button>
+        </div>
+        <div v-else>
+            <button class="btn btn-lg btn-success mb-1" @click="admin('advance')">Advance Game</button>
+        </div>
+    </div>
+</div>

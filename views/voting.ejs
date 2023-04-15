@@ -1,0 +1,33 @@
+<form v-if="me.state == 0" @submit.prevent="">
+
+    <div class="d-md-flex gap-2 justify-content-md-center mb-2 text-wrap">
+        <h5><strong>{{votingPrompts[0][1]}}</strong></h5>
+    </div>
+    <div class="d-md-flex gap-2 justify-content-md-center mb-2">
+        <p><strong>Pick your favourite response!</strong></p>
+    </div>
+
+    <div class="gap-2 justify-content-md-center mb-2 text-center"> 
+        <button type="submit" button class="btn btn-lg btn-success mb-1" @click="submitVote('0')">{{votingPrompts[0][2][0]['answer']}}</button>
+        <button type="submit" button class="btn btn-lg btn-success mb-1" @click="submitVote('1')">{{votingPrompts[0][2][1]['answer']}}</button>
+    </div>
+
+</form>
+
+<div v-else>
+    <p><strong>Waiting for everyone to vote...</strong></p>
+
+    <div class="row mb-2">
+        <div v-for="player of players" class="col-sm-3 text-center">
+            <div v-if="player.state == 0">
+                <div class="player">
+                    <strong>{{player.name}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="me.number == 1" class="d-md-flex justify-content-md-center">
+        <button class="btn btn-lg btn-success mb-1" @click="admin('advance')">Show Result</button>
+    </div>
+</div>

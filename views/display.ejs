@@ -3,19 +3,58 @@
 
     <%- include('header'); -%>
 
-    <h2 class="title">ECS Example Game</h2>
+    <h2 class="title">ECS Quiplash Game [DISPLAY]</h2>
 
-    <div id="game">
-        <div v-if="connected">
-            <ul id="chat">
-                <li v-for="message in messages">{{message}}</li>
-            </ul>
+    <div id="display">
+       
+        <!-- Waiting for connection -->
+        <div v-if="state.state === false">
+            <%- include('loading') -%>
         </div>
-        <div v-else>
-            <p>Connecting...</p>
-        </div>
-    </div>
 
-    <%- include('footer'); -%>
+        <!-- Waiting for player to join -->
+        <div v-else-if="state.state == 0">
+            <%- include('displayWaiting') -%>
+        </div>
+
+        <!-- Entering prompts -->
+        <div v-else-if="state.state == 1">
+            <%- include('displayPrompts') -%>
+        </div>
+
+        <!-- Entering answers -->
+        <div v-else-if="state.state == 2">
+            <%- include('displayAnswers') -%>
+        </div>
+
+        <!-- Voting -->
+        <div v-else-if="state.state == 3">
+            <%- include('displayVoting') -%>
+        </div>
+
+        <!-- Results -->
+        <div v-else-if="state.state == 4">
+            <%- include('displayResults') -%>
+        </div>
+        
+        <!-- Scores -->
+        <div v-else-if="state.state == 5">
+            <%- include('displayScores') -%>
+        </div>
+
+        <!-- Game Over -->
+        <div v-else-if="state.state == 6">
+            <%- include('displayGameover') -%>
+        </div>
+        
+        <div class="bannerCount">
+            <strong>{{Object.keys(audience).length}}</strong> in audience
+        </div>
+
+        <div class="admin">
+            <p><strong>Debug information:</strong> Game state: {{state.state}} | Round: {{state.round}}</p>
+        </div>
+
+    <%- include('footerdis'); -%>
 
 </html>

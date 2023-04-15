@@ -1,0 +1,37 @@
+<form v-if="me.state == 0 && me.player" @submit.prevent="submitAnswer(answer)">
+    
+    <div class="d-md-flex justify-content-md-center mb-2 text-wrap">
+        <h5>{{(me.prompts[0])['prompt']}}</h5>
+    </div>
+
+    <div class="d-md-flex mb-2">
+        <label class="form-label" for="answer"></label>
+        <input type="text" id="answer" placeholder="Enter Answer" v-model="answer" class="form-control text-center">
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-2">
+        <button type="submit" button class="btn btn-lg btn-success">Submit</button>
+    </div>
+</form>
+
+<div v-else>
+    <div> 
+        <div v-if="me.player == false">
+            <p><strong>Audience members cannot answer prompts</strong></p>
+        </div>
+        <p><strong>Waiting for everyone to answer...</strong></p>
+    </div>
+    
+    <div class="row mb-2">
+        <div v-for="player of players" class="col-sm-3 text-center">
+            <div v-if="player.state == 0">
+                <div class="player">
+                    <strong>{{player.name}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-if="me.number == 1" class="d-md-flex justify-content-md-center">
+        <button class="btn btn-lg btn-success mb-1" @click="admin('advance')">Advance Game</button>
+    </div>
+</div>

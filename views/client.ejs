@@ -3,41 +3,84 @@
 
     <%- include('header'); -%>
 
-    <h2 class="title">ECS Example Game</h2>
-
     <div id="game">
+       
+        <div class="row">
+            <div class="col-md-9">
 
-        <!-- Error Display -->
-        <div v-if="error" class="alert alert-danger">
-            <strong>Error: </strong> {{error}}
+                <h2 class="title">ECS Quiplash Game</h2>
+
+                <!-- Waiting for connection -->
+                <div v-if="state.state === false">
+                    <%- include('loading') -%>
+                </div>
+
+                <!-- Waiting for player to join -->
+                <div v-else-if="state.state == 0">
+                    <%- include('join') -%>
+                </div>
+
+                <!-- Entering prompts -->
+                <div v-else-if="state.state == 1">
+                    <%- include('prompts') -%>
+                </div>
+
+                <!-- Entering answers -->
+                <div v-else-if="state.state == 2">
+                    <%- include('answers') -%>
+                </div>
+
+                <!-- Voting -->
+                <div v-else-if="state.state == 3">
+                    <%- include('voting') -%>
+                </div>
+
+                <!-- Results -->
+                <div v-else-if="state.state == 4">
+                    <%- include('results') -%>
+                </div>
+
+                <!-- Scores -->
+                <div v-else-if="state.state == 5">
+                    <%- include('scores') -%>
+                </div>
+
+                <!-- game over -->
+                <div v-else-if="state.state == 6">
+                    <%- include('gameover') -%>
+                </div>
+
+                <!-- Error Display -->
+                <div v-if="error" class="alert alert-danger">
+                    <strong>Error: </strong> {{error}}
+                </div>
+
+                <div v-if="state.state > 0">
+                    <div v-if="me.player" class="banner">
+                        <strong>{{me.name}}</strong>
+                    </div>
+                    <div v-else class="bannerAud">
+                        <strong>{{me.name}}</strong> <small>[audience member]</small>
+                    </div>
+                    
+                </div>
+
+                <div v-if="state.state > 0" class="bannerCount">
+                    <strong>{{Object.keys(audience).length}}</strong> in audience
+                </div>
+
+                <div class="admin">
+                    <p><strong>Debug information:</strong> My state: {{me.state}} | Game state: {{state.state}}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <input type="text" @keyup.enter="chat()" v-model="chatmessage" class="form-control" placeholder="Chat" v-if="me.state > 0 || (me.player == false && state.state > 0)">
+                <ul id="messages">
+                </ul>
+            </div>
         </div>
-
-        <!-- Waiting for connection -->
-        <div v-if="state.state === false">
-            <%- include('loading') -%>
-        </div>
-
-        <!-- Waiting for player to join -->
-        <div v-else-if="state.state == 0">
-            <%- include('join') -%>
-        </div>
-
-        <!-- Playing the game -->
-        <div v-else-if="state.state == 1">
-            <%- include('play') -%>
-        </div>
-
-        <!-- Final scores ->
-        <div v-else-if="state.state == 2">
-            <%- include('scores') -%>
-        </div> -->
-
-        <div class="admin">
-            <p><strong>Debug information:</strong> My state: {{me.state}} | Game state: {{state.state}}</p>
-        </div>
-
     </div>
-
+    
     <%- include('footer'); -%>
 
 </html>

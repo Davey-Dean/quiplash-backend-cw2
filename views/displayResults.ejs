@@ -1,0 +1,28 @@
+<div>
+    <div class="d-md-flex justify-content-md-center mb-3">
+        <h2>{{votingPrompts[0][1]}}</h2>
+    </div>
+
+    <div class="wrapperResult text-center">
+        <div class="border border-3 border-warning rounded p-2 m-2 test">
+            <div class="fw-bold mb-2">
+                <p class="text-white">{{votingPrompts[0][2][0]['answer']}}</p>
+                <p class="userP">{{votingPrompts[0][2][0]['name']}}</p>
+                <p class="votes">{{voteGroupUno.length}} votes</p>
+                <div class="d-flex flex-wrap gap-2 align-items-center justify-content-center voters">
+                    <p v-for="player of voteGroupUno">{{player}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="border border-3 border-warning rounded p-2 m-2 test">
+            <div class="fw-bold mb-2">
+                <p class="text-white">{{votingPrompts[0][2][1]['answer']}}</p>
+                <p class="userP">{{votingPrompts[0][2][1]['name']}}</p>
+                <p class="votes">{{voteGroupDos.length}} votes</p>
+                <div class="d-flex flex-wrap gap-2 align-items-center justify-content-center voters">
+                    <p v-for="player of voteGroupDos">{{player}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

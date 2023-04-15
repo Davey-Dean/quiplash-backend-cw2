@@ -1,0 +1,33 @@
+<form v-if="me.state == 0" @submit.prevent="submitPrompt(prompt)">
+
+    <div class="d-md-flex justify-content-md-center mb-2">
+        <h5>Think of a funny question or prompt</h5>
+    </div>
+
+    <div class="d-md-flex mb-2">
+        <label class="form-label" for="prompt"></label>
+        <input type="text" id="prompt" placeholder="Enter Prompt" v-model="prompt" class="form-control text-center">
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-2">
+        <button type="submit" button class="btn btn-lg btn-success">Submit Prompt</button>
+    </div>
+</form>
+
+<div v-else>
+    <p>Waiting for everyone to enter a prompt...</p>
+
+    <div class="row mb-2">
+        <div v-for="player of players" class="col-sm-3 text-center">
+            <div v-if="player.state == 0">
+                <div class="player">
+                    <strong>{{player.name}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div v-if="me.number == 1" class="d-md-flex justify-content-md-center">
+        <button class="btn btn-lg btn-success mb-1" @click="admin('advance')">Advance Game</button>
+    </div>
+</div>

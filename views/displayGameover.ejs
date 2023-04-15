@@ -1,0 +1,17 @@
+<div class="d-md-flex gap-2 justify-content-md-center mb-2 text-wrap">
+    <h2>GAME OVER</h2>
+</div>
+<div class="d-md-flex gap-2 justify-content-md-center mb-3">
+    <h3>Thank you for playing ECS Quiplash!</h3>
+</div>
+<div class="d-md-flex gap-2 justify-content-md-center mb-2">
+    <h2>Final Scores</h2>
+</div>
+<div class="wrapper">
+    <div v-for="player of finalPlayers" class="border border-3 border-warning rounded p-2 m-2 test">
+        <div class="fw-bold mb-2 text-center">
+            <p class="text-white">{{player.name}}</p>
+            <p class="text-warning">{{player.totalScore}}</p>
+        </div>
+    </div>
+</div>

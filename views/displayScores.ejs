@@ -1,0 +1,14 @@
+<div>
+    <div class="d-md-flex justify-content-md-center mb-3">
+        <h2>And the scores...</h2>
+    </div>
+
+    <div class="wrapper">
+        <div v-for="player of players" class="border border-3 border-warning rounded p-2 m-2 test">
+            <div class="fw-bold mb-2 text-center">
+                <p class="text-white">{{player.name}}</p>
+                <p class="text-warning">{{player.totalScore}}</p>
+            </div>
+        </div>
+    </div>
+</div>

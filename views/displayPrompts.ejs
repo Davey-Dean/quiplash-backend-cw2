@@ -1,0 +1,15 @@
+<div>
+    <div class="d-md-flex justify-content-md-center mb-3">
+        <h2>Enter your Prompts now!</h2>
+    </div>
+
+    <div class="row mb-2">
+        <div v-for="player of players" class="col-sm-3 text-center">
+            <div v-if="player.state == 1">
+                <div class="player">
+                    <strong>{{player.name}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

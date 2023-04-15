@@ -24,12 +24,53 @@ body {
     color: white;
     text-align: center;
 }
+.banner {
+    background-color: plum;
+    color: black;
+    text-align: center;
+}
+.bannerAud {
+    background-color: orange;
+    color: black;
+    text-align: center;
+}
+.bannerCount {
+    float: right;
+    width: 30vh;
+    background-color: gainsboro;
+    color: black;
+    text-align: center;
+}
 .container {
     background-color: rgba(255,255,255,0.8);
     padding-bottom: 10px;
     padding-top: 10px;
     height: 100vh;
 }
+.flex-even {
+    flex: 1;
+}
+.test {
+    background-color: black;
+}
+.userP {
+    color: orange;
+}
+.votes {
+    color: yellow;
+}
+.voters {
+    color: wheat;
+    font-size: 15px;
+}
+.wrapperResult {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* twp equal sized columns */
+  }
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* four equal sized columns */
+  }
 #messages { 
     list-style-type: none; 
     margin: 0; 

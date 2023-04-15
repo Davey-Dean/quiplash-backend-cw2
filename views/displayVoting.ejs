@@ -1,0 +1,32 @@
+<div>
+    <div class="d-md-flex justify-content-md-center mb-3">
+        <h2>Vote on your Favourite Answers!</h2>
+    </div>
+
+    <div class="d-md-flex gap-2 justify-content-md-center mb-2 text-wrap">
+        <h2><strong>{{votingPrompts[0][1]}}</strong></h2>
+    </div>
+    
+    <div class="wrapperResult text-center mb-3">
+        <div class="border border-3 border-warning rounded p-2 m-2 test">
+            <div class="fw-bold mb-2"> 
+                <p class="text-white">{{votingPrompts[0][2][0]['answer']}}</p>
+            </div>
+        </div>
+        <div class="border border-3 border-warning rounded p-2 m-2 test">
+            <div class="fw-bold mb-2"> 
+                <p class="text-white">{{votingPrompts[0][2][1]['answer']}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div v-for="player of players" class="col-sm-3 text-center">
+            <div v-if="player.state == 1">
+                <div class="player">
+                    <strong>{{player.name}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
